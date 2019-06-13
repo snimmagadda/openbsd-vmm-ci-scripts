@@ -61,7 +61,7 @@ Boot and login to the new virtual machine and attach a console with...
 ```
 
 With "Local Interfaces" used with option -L, vmctl(8) creates a
-tap(4) interface on the host which could be used to derive the DHCP
+tap(4) interface on the host with vm name embedded in "description" line that could be used to derive the DHCP
 IP allocated to the guest vm. First, extract the IP on the host
 tap(4) interface with the following shell script...
 ```
@@ -80,4 +80,4 @@ done
 
 exit 1
 ```
-<TODO> x.x.n.p -> x.x.n.p+1
+TODO: x.x.n.p -> x.x.n.p+1

@@ -35,6 +35,12 @@ First, the host configurations...
 ```
    appended to /etc/pf.conf
 
+6. Enable ip forwarding with...
+```
+	sysctl net.inet.ip.forwarding=1
+```
+Add it to /etc/sysctl.conf as well.
+
 Create a disk for virtual machine... 
 ```
 	vmctl create -s 4.5G disk.qcow2

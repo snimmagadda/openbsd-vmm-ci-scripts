@@ -82,3 +82,8 @@ done
 
 exit 1
 ```
+
+Example usage:
+```
+ip=$(vm_ip.sh vmm1); scp project.tar.gz puffy@$ip: && ssh puffy@$ip 'tar zxvf project.tar.gz && cd project && make'
+```

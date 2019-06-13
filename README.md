@@ -61,9 +61,10 @@ Boot and login to the new virtual machine and attach a console with...
 ```
 
 With "Local Interfaces" used with option -L, vmctl(8) creates a
-tap(4) interface on the host with vm name embedded in "description" line that could be used to derive the DHCP
-IP allocated to the guest vm. First, extract the IP on the host
-tap(4) interface with the following shell script...
+tap(4) interface on the host which could be used to derive the DHCP
+IP allocated to the guest vm using its name. Following shell script
+outputs the vm's IP given its name. The scheme of IP allocation is
+documented under "LOCAL INTERFACES" section of vmctl(8).
 ```
 #! /bin/sh
 
@@ -74,10 +75,10 @@ fi
 local _n=0
 while ifconfig tap$_n > /dev/null 2>&1; do
 	ifconfig tap$_n | grep -q "$1" &&
-	ifconfig tap$_n | awk '/inet/ { print $2 }' && exit 0
+	ifconfig tap$_n | awk '/inet/ { print $2 }' |
+	awk 'BEGIN { FS="." } {printf "%d.%d.%d.%d\n", $1,$2,$3,$4+1}' && exit 0
 	_n=$((_n+1))
 done
 
 exit 1
 ```
-TODO: x.x.n.p -> x.x.n.p+1
